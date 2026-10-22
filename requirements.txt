@@ -1,0 +1,4 @@
+Django
+opencv-python
+numpy
+Pillow

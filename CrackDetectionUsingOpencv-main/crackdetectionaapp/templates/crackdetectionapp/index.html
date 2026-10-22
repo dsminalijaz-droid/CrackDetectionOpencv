@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<title>Crack Detection</title>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <script>
+     $(document).ready(function ()
+    {           
+        $('.NO-CACHE').attr('src',function () { return $(this).attr('src') + "?a=" + Math.random() });
+    });
+    
+    $()
+
+    $(function() {
+   $('form').submit(function() {
+      if(!$("form input[type=file]").val()) {
+         alert('You must select a file!');
+         return false;
+      }
+   });
+});
+    </script>
+<style>
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+.image {
+   width: 700px;
+  height: 500px; 
+  flex-basis: 40%
+  
+}
+
+h2 {
+  background-color: #838383;
+    min-width: 184px;
+    border-radius: 6px;
+    text-align: center;
+    height: 30px;
+}
+#text{border-radius: 10px;
+    background: red;
+    width: 318px;
+    height: 20px;
+    margin: 0 auto;
+    color: #fff;
+    padding: 28px;
+    text-align: center;}
+    
+    #out {
+        display: none;
+    }
+
+    body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "Lato", Arial, Helvetica, sans-serif;
+  }
+
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #838383;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar {font-size: 18px;}
+}
+
+</style>
+
+</head>
+<body>
+  <body style="background-color:#f9f9f9;">
+    
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="http://127.0.0.1:8000/">Home</a>
+      <a href="http://127.0.0.1:8000/objective">Objective</a>
+      <a href="http://127.0.0.1:8000/detection">Detect</a>
+    </div>
+    
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">☰ </button> 
+    </div>
+    
+    <script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+
+    function func(){
+      location.replace('http://127.0.0.1:8000/detection');
+
+    }
+    </script>
+
+
+    
+    <br>
+    <br>
+<br>
+<br>
+<br>
+
+<form method="post" enctype="multipart/form-data" action="upload">
+   
+    {% csrf_token %}
+
+   <center> <input type="file" name="image" accept="image/*">
+    <input type="submit" value="Upload Image" name="submit" > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <input type="button"  value="Detect" onclick="show()" > &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+    <input type="reset" value="Reset" onclick="func()">
+   </center>
+    
+</form>
+<br>
+<br>
+<div class="text" id="text" style="display: none"></div>
+<br>
+<div class = "flex" style = "display: flex;
+flex-direction: row;
+align-items: center;
+padding-bottom: 38px;
+align-content: center;
+justify-content: space-evenly;">
+
+<div class="oi">
+
+<h2 >Original Image :</h2> 
+
+<img class="NO-CACHE" id = "oii" src = "{{img}}"  width="700" height="500" >
+</div>
+<div class="outt">
+  <h2 >Ouput :</h2> 
+  
+  <div class="image"><img class="NO-CACHE" id="out" src="/media/output/s.jpg" width="700" height="500" ></div>
+</div>
+
+
+    
+<br>
+<br>
+
+<br>
+
+
+
+</div>
+</div>
+
+<script>
+     var lim = "{{ count_white }}";
+     console.log("CI = " + lim);
+     var msg = document.getElementById("text");
+
+    function show() {
+        document.getElementById('out')
+                .style.display = "block";
+                
+       showw();
+    }
+
+    function showw() {
+setTimeout(function() { $("#text").fadeOut(1500); }, 5000)
+
+
+       if (lim > 600 && lim < 20000)
+       {
+        msg.style.display="block";
+        msg.innerHTML = "Crack Detected !!!";
+
+       }
+       else { msg.style.display="block";
+        msg.innerHTML = "NO Crack Detected !!!"; }
+    }
+
+</script>
+
+</body>
+</html>
+

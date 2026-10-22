@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+<title>Crack Detection</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+ 
+  
+
+<style>
+   
+    body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "Lato", Arial, Helvetica, sans-serif;
+  }
+    .sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #838383;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar {font-size: 18px;}
+}
+
+
+.about-content{
+    margin: 100px auto 0 auto;
+    width: 500px;
+}
+ .about-content h1{
+    text-align: center;
+}
+ .about-content p{
+    text-align: justify;
+}
+</style>
+
+</head>
+<body>
+  <body style="background-color:#f9f9f9;">
+    
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="http://127.0.0.1:8000/">Home</a>
+      <a href="http://127.0.0.1:8000/objective">Objective</a>
+      <a href="http://127.0.0.1:8000/detection">Detect</a>
+    </div>
+    
+    <div id="main">  
+      <button class="openbtn" onclick="openNav()">☰ </button>
+        
+    </div>
+    
+    <script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+    
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+    </script>
+      <div class="about-content">
+        <h1><b>Objective</b></h1>
+        <br>
+        <p>Defects are the earliest signs of degradation of any structure, the parameters such length, width, size and direction of propagation of defects impose harmful effects to the durability of the structure. Therefore, image-based defect detection is proposed as a fast and reliable alternative to manual inspection. It is safer and easier since it does not involve destructive means of inspection.</p>
+    </div>
+    </body>
+    </html>
